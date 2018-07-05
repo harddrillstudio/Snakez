@@ -12,11 +12,11 @@ public class Individual {
         genes = new int[genomeLength];
         fitness = 0;
 
-        randomizeGenome();
+        //randomizeGenome();
     }
 
     public void printIndividual() {
-        System.out.println("F: " +fitness+ " G: " +getGenes());
+        System.out.println("F: " +fitness+ " G: " + getGenesInString());
     }
 
     public void calculateFitness() {
@@ -27,6 +27,12 @@ public class Individual {
         this.fitness = newFit;
     }
 
+    public void mutate() {
+        Random random = new Random();
+        int index = random.nextInt(genomeLength);
+        this.genes[index] = (this.genes[index] + 1 ) % 2;
+    }
+
     private void randomizeGenome() {
         Random random = new Random();
         for (int i = 0; i < genes.length; i++) {
@@ -34,7 +40,7 @@ public class Individual {
         }
     }
 
-    private String getGenes() {
+    private String getGenesInString() {
         StringBuilder builder = new StringBuilder();
 
         for (int chunk : this.genes) {

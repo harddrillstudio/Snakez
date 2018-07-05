@@ -1,12 +1,17 @@
 package dev.harddrillstudio.gen.snakez.genetics;
 
 import java.util.ArrayList;
+import java.util.Random;
 
 public class Population {
 
     ArrayList<Individual> individuals;
 
-    Individual fittest, secondFittest;
+    int bestFitIndex, worstFitIndex;
+
+    public static double mutationRate = 0.9;
+
+    Random random = new Random();
 
     public Population() {
         individuals = new ArrayList<>();
@@ -30,15 +35,48 @@ public class Population {
         }
     }
 
+    public Individual getWorstIndividual() {
+        int minFit = 0;
+        for (int i = 0; i < individuals.size(); i++) {
+            if (minFit > individuals.get(i).fitness) {
+                minFit = individuals.get(i).fitness;
+                //worstIndividual = individuals.get(i);
+                worstFitIndex = i;
+            }
+        }
+
+        return individuals.get(worstFitIndex);
+    }
+
+    public Individual getBestIndividual() {
+        int maxFit = 0;
+        for (int i = 0; i < individuals.size(); i++) {
+            if (maxFit < individuals.get(i).fitness) {
+                maxFit = individuals.get(i).fitness;
+                bestFitIndex = i;
+                //worstIndividual = individuals.get(i);
+            }
+        }
+
+        return individuals.get(bestFitIndex);
+    }
+
     public int getHighestFitness() {
         int maxFit = 0;
         for (Individual i: individuals) {
             if (maxFit < i.fitness) {
                 maxFit = i.fitness;
-                fittest = i;
+                //fittest = i;
             }
         }
         return maxFit;
+    }
+
+    public void mutation() {
+        if (random.nextDouble() < mutationRate) {
+            individuals.get(0).mutate();
+            individuals.get(1).mutate();
+        }
     }
 
     public Individual breedIndividual(Individual mother, Individual father) {
@@ -53,8 +91,13 @@ public class Population {
         return offspring;
     }
 
-    public void selectDuo() {
+    public void breed() {
+        getWorstIndividual();
+        getBestIndividual();
 
+        Individual x = individuals.get(worstFitIndex);
+
+        //worstIndividual = breedIndividual(fittest, individuals.get(3));
     }
 
 }

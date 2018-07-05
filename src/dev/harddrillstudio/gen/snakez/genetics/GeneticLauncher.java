@@ -22,21 +22,28 @@ public class GeneticLauncher {
 
         population.calculateFitness();
 
-        population.printPopulation();
-        System.out.println("Highest fitness:" + population.getHighestFitness());
+        //population.printPopulation();
+
 
         while(population.getHighestFitness() < 5) {
-            selection();
+
             crossover();
+
             mutation();
+
             population.calculateFitness();
+
+            System.out.println("Highest fitness:" + population.getHighestFitness());
+
+            breed();
+
             population.printPopulation();
         }
 
     }
 
-    private void selection() {
-        population.selectDuo();
+    private void breed() {
+        population.breed();
     }
 
     private void crossover() {
@@ -44,7 +51,7 @@ public class GeneticLauncher {
     }
 
     private void mutation() {
-
+        population.mutation();
     }
 
     private void initializePopulation() {
