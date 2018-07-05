@@ -6,7 +6,7 @@ public class Individual {
 
     public int[] genes;
     public int fitness;
-    public static int genomeLength = 5;
+    public static int genomeLength = 15;
 
     public Individual() {
         genes = new int[genomeLength];

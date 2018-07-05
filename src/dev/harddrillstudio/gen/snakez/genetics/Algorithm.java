@@ -12,15 +12,11 @@ public class Algorithm {
 
 
 
-    private void selection() {
-        population.calculateFitness();
-    }
-
-
     public void initializePopulation() {
         population = new Population();
         System.out.println("Population generated!");
         System.out.println();
+
     }
 
 
@@ -31,34 +27,40 @@ public class Algorithm {
 
         for (int i = 0; i < pop.size(); i++) {
             Individual mother = rouletteSelect(population);
-            mother.printIndividual();
+            //mother.printIndividual();
             Individual father = rouletteSelect(population);
-            father.printIndividual();
+            //father.printIndividual();
             Individual offspring = crossover(mother, father);
+
+            offspring = mutate(offspring);
+
             newPop.individuals.set(i, offspring);
         }
 
+        newPop.calculateFitness();
         return newPop;
     }
 
 
     // SELECTION
     private Individual rouletteSelect(Population pop) {
-        selection();
+        pop.calculateFitness();
         double rand = random.nextDouble() * pop.totalFitness;
 
         int idx;
-        for (idx = 0; idx < pop.popSize && rand > 0; idx++) {
+        for (idx = 0; idx < pop.popSize-1 && rand > 0; ++idx) {
             rand -= pop.individuals.get(idx).fitness;
         }
-        System.out.println("Selected index: "+idx);
+        //System.out.println("Selected index: "+idx);
         return pop.individuals.get(idx);
     }
 
 
     // MUTATION
     private Individual mutate(Individual individual) {
-        individual.mutate();
+        double rand = random.nextDouble();
+        if (rand < MUTATION_RATE)
+            individual.mutate();
         return individual;
     }
 

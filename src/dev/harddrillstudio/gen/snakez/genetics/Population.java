@@ -19,6 +19,7 @@ public class Population {
             System.out.println(i + ": Individual created!");
         }
 
+        calculateFitness();
         //printPopulation();
     }
 
@@ -40,6 +41,17 @@ public class Population {
 
     public int size() {
         return popSize;
+    }
+
+    public Individual getFittest() {
+        Individual fittest = individuals.get(0);
+
+        for (Individual i: individuals) {
+            if (i.fitness > fittest.fitness)
+                fittest = i;
+        }
+
+        return fittest;
     }
 
 }
