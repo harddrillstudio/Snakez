@@ -16,7 +16,6 @@ public class Main extends Application {
     public void start(Stage primaryStage) throws Exception {
 
         GeneticLauncher geneticLauncher = new GeneticLauncher();
-        geneticLauncher.start();
 
         Line line = new Line(0, 0, 100,120);
 

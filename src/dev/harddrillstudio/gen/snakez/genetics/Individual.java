@@ -12,7 +12,7 @@ public class Individual {
         genes = new int[genomeLength];
         fitness = 0;
 
-        //randomizeGenome();
+        randomizeGenome();
     }
 
     public void printIndividual() {
