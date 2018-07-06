@@ -12,7 +12,7 @@ public class GeneticLauncher {
 
         int genCount = 0;
 
-        while(algorithm.population.getFittest().fitness < 15) {
+        while(algorithm.population.getFittest().fitness < 150) {
 
             algorithm.population = algorithm.evolvePopulation(algorithm.population);
 

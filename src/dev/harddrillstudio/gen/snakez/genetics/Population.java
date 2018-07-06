@@ -4,14 +4,15 @@ import java.util.ArrayList;
 
 public class Population {
 
-    final static int popSize = 10;
+    public int popSize;
 
     ArrayList<Individual> individuals;
 
     int totalFitness;
 
 
-    public Population() {
+    public Population(int size) {
+        popSize = size;
         individuals = new ArrayList<>();
 
         for (int i = 0; i < popSize; i++) {
